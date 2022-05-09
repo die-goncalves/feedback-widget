@@ -1,0 +1,12 @@
+{
+  "name": "widget-feedback",
+  "version": "1.0.0",
+  "description": "Projeto do NLW #08 - Impulse da Rocketseat",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "Diego Gonçalves <die.goncalves1990@gmail.com>",
+  "license": "MIT"
+}
