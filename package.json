@@ -9,5 +9,7 @@
     "packages/common/*"
   ],
   "author": "Diego Gonçalves <die.goncalves1990@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "eslintConfig": { "extends" : "@widget-feedback/eslint-config" },
+  "prettier": "@widget-feedback/prettier-config"
 }
