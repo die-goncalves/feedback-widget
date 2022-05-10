@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/common/*"
   ],
   "author": "Diego Gonçalves <die.goncalves1990@gmail.com>",
   "license": "MIT"

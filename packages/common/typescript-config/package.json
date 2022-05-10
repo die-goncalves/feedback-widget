@@ -1,0 +1,9 @@
+{
+  "name": "@widget-feedback/typescript-config",
+  "version": "1.0.0",
+  "main": "tsconfig.json",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  }
+}
