@@ -22,6 +22,13 @@ export class SubmitFeedbackUseCase {
   async execute(request: SubmitFeedbackUseCaseRequest) {
     const { comment, type, screenshot } = request
 
+    if (!comment) {
+      throw new Error('The feedback must have a comment')
+    }
+    if (!type) {
+      throw new Error('The feedback needs to have a type')
+    }
+
     await this.feedbacksRepository.create({
       type,
       comment,
