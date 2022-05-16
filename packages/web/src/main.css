@@ -4,6 +4,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Config scrollbar: https://github.com/tailwindlabs/tailwindcss/discussions/1640#discussioncomment-1694399 */
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 0.75rem;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #52525b; 
+    border-radius: 0.75rem;
+    border: 0.25rem solid #18181b;
+  }
+  .scrollbar::-webkit-scrollbar-button {
+    height: 0.125rem;
+    background: transparent
+  }
+  .scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 0.75rem;
+  }
+}
+
 body {
   font-family: 'Inter', sans-serif;
 }
