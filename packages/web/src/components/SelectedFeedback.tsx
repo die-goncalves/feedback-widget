@@ -1,5 +1,6 @@
 import { CircleNotch } from 'phosphor-react'
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { api } from '../lib/api'
 import { FeedbackTypes } from '../utils/feedbackTypes'
 import { ScreenshotButton } from './ScreenshotButton'
 
@@ -29,11 +30,15 @@ export function SelectedFeedback({
   const [screenshot, setScreenshot] = useState<string | null>(null)
   const [sendingFeedback, setSendingFeedback] = useState<boolean>(false)
 
-  function handleSubmitFeedback(event: FormEvent) {
+  async function handleSubmitFeedback(event: FormEvent) {
     event.preventDefault()
 
     setSendingFeedback(true)
-    console.log(textareaChange, screenshot)
+    await api.post('/feedbacks', {
+      type: feedbackType,
+      comment: textareaChange,
+      screenshot
+    })
     setSendingFeedback(false)
 
     setFeedbackSent(true)
