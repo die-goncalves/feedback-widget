@@ -1,5 +1,6 @@
 module.exports = {
   content: ['./src/**/*.tsx'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -12,8 +13,9 @@ module.exports = {
         'dark/stroke': '#52525b',
         'dark/tooltip': '#f4f4f5',
         'dark/text-primary': '#f4f4f5',
-        'dark/text-secondary': '#A1A1AA',
+        'dark/text-secondary': '#a1a1aa',
         'dark/text-on-tooltip': '#27272a',
+        'dark/background': '#09090a',
         'light/surface-primary': '#ffffff',
         'light/surface-secondary': '#f4f4f5',
         'light/surface-secondary-hover': '#e4e4e7',
@@ -21,7 +23,8 @@ module.exports = {
         'light/tooltip': '#27272a',
         'light/text-primary': '#27272a',
         'light/text-secondary': '#71717a',
-        'light/text-on-tooltip': '#f4f4f5'
+        'light/text-on-tooltip': '#f4f4f5',
+        'light/background': '#ffffff'
       }
     }
   },

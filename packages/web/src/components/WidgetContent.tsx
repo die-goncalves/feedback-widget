@@ -16,7 +16,7 @@ export function WidgetContent() {
   }
 
   return (
-    <div className="w-[21rem] h-[16.5rem] bg-dark/surface-primary p-4 rounded-[1rem] relative flex flex-col items-center shadow-lg">
+    <>
       <Header
         feedbackType={feedbackType}
         feedbackSent={feedbackSent}
@@ -35,6 +35,6 @@ export function WidgetContent() {
       )}
 
       <Footer />
-    </div>
+    </>
   )
 }

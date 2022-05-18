@@ -6,21 +6,52 @@
 
 /* Config scrollbar: https://github.com/tailwindlabs/tailwindcss/discussions/1640#discussioncomment-1694399 */
 @layer utilities {
-  .scrollbar::-webkit-scrollbar {
+  .scrollbar-textarea::-webkit-scrollbar {
     width: 0.75rem;
   }
-  .scrollbar::-webkit-scrollbar-thumb {
-    background: #52525b; 
+  .scrollbar-textarea::-webkit-scrollbar-thumb {
     border-radius: 0.75rem;
-    border: 0.25rem solid #18181b;
+    border: 0.25rem;
+    border-style: solid
   }
-  .scrollbar::-webkit-scrollbar-button {
+  .dark-scrollbar-textarea::-webkit-scrollbar-thumb{
+    background: #52525b; 
+    border-color: #18181b;
+  }
+  .light-scrollbar-textarea::-webkit-scrollbar-thumb{
+    background: #d4d4d8; 
+    border-color: #ffffff;
+  }
+  .scrollbar-textarea::-webkit-scrollbar-button {
     height: 0.125rem;
     background: transparent
   }
-  .scrollbar::-webkit-scrollbar-track {
+  .scrollbar-textarea::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 0.75rem;
+  }
+
+  .scrollbar-app::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  .dark-scrollbar-thumb-app::-webkit-scrollbar-thumb{
+    background: #52525b; 
+  }
+  .light-scrollbar-thumb-app::-webkit-scrollbar-thumb{
+    background: #d4d4d8; 
+  }
+  .scrollbar-app::-webkit-scrollbar-button {
+    height: 0rem;
+    width: 0rem;
+  }
+  .scrollbar-app::-webkit-scrollbar-corner {
+    width: 0rem;
+  }
+  .dark-scrollbar-track-app::-webkit-scrollbar-track {
+    background: #09090a;
+  }
+  .light-scrollbar-track-app::-webkit-scrollbar-track {
+    background: #ffffff;
   }
 }
 

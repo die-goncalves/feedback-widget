@@ -50,14 +50,16 @@ export function SelectedFeedback({
 
   return (
     <form onSubmit={handleSubmitFeedback} className="flex flex-col my-4 gap-2">
-      <textarea
-        style={{
-          scrollbarGutter: 'stable'
-        }}
-        onChange={handleTextareaChange}
-        className="text-dark/text-primary caret-brand transition-[box-shadow] duration-300 ease-out scrollbar scroll-smooth scroll-pb-4 cursor-auto pl-3 py-2 text-[0.875rem] w-[19rem] h-28 border-[0.0625rem] border-dark/stroke rounded-[0.25rem] bg-dark/surface-primary placeholder:text-dark/text-secondary placeholder:text-[0.875rem] focus:outline-none focus:border-brand focus:ring-[0.0625rem] ring-brand resize-none"
-        placeholder={placeholder(feedbackType)}
-      />
+      <div className="flex w-[19rem] h-28 rounded-[0.25rem] ring-[0.0625rem] ring-inset ring-light/stroke dark:ring-dark/stroke">
+        <textarea
+          style={{
+            scrollbarGutter: 'stable'
+          }}
+          onChange={handleTextareaChange}
+          className=" w-full text-light/text-primary dark:text-dark/text-primary caret-brand transition-[border] duration-300 ease-out scrollbar-textarea light-scrollbar-textarea dark:dark-scrollbar-textarea scroll-smooth scroll-pb-4 cursor-auto pl-3 py-2 text-[0.875rem] border-[0.125rem] border-transparent rounded-[0.25rem] bg-transparent placeholder:text-light/text-secondary dark:placeholder:text-dark/text-secondary placeholder:text-[0.875rem] focus:outline-none focus:border-brand resize-none"
+          placeholder={placeholder(feedbackType)}
+        />
+      </div>
 
       <footer className="flex">
         <ScreenshotButton
@@ -68,7 +70,7 @@ export function SelectedFeedback({
           type="submit"
           disabled={!textareaChange || sendingFeedback}
           aria-disabled={!textareaChange || sendingFeedback}
-          className="flex flex-1 ml-2 justify-center items-center rounded-[0.25rem] text-dark/text-primary bg-brand hover:bg-brand-hover disabled:cursor-not-allowed disabled:bg-brand disabled:opacity-50 transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark/surface-primary focus:ring-brand"
+          className="flex flex-1 ml-2 justify-center items-center rounded-[0.25rem]  text-text-on-brand-color bg-brand hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50 hover:disabled:bg-brand transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-light/surface-primary dark:focus:ring-offset-dark/surface-primary focus:ring-brand"
           {...(sendingFeedback
             ? {
                 'aria-label': 'Enviando feedback',
@@ -83,7 +85,9 @@ export function SelectedFeedback({
           {sendingFeedback ? (
             <CircleNotch className="w-6 h-6 animate-spin" />
           ) : (
-            'Enviar feedback'
+            <span className="text-[0.875rem] leading-[1.5rem] font-medium">
+              Enviar feedback
+            </span>
           )}
         </button>
       </footer>
