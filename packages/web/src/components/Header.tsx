@@ -19,7 +19,7 @@ export function Header({
     <header>
       {!feedbackSent &&
         (!feedbackTypeInfo ? (
-          <h1 className="text-[1.25rem] leading-[1.5rem] font-medium text-dark/text-primary">
+          <h1 className="text-[1.25rem] leading-[1.5rem] font-medium text-light/text-primary dark:text-dark/text-primary">
             Deixe seu feedback
           </h1>
         ) : (
@@ -31,7 +31,7 @@ export function Header({
                 src={feedbackTypeInfo.image.source}
                 alt={feedbackTypeInfo.image.alt}
               />
-              <h1 className="text-[1.25rem] leading-[1.5rem] font-medium text-dark/text-primary">
+              <h1 className="text-[1.25rem] leading-[1.5rem] font-medium text-light/text-primary dark:text-dark/text-primary">
                 {feedbackTypeInfo.title}
               </h1>
             </div>
