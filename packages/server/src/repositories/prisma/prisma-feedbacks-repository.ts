@@ -3,7 +3,8 @@ import {
   FeedbackCreateData,
   FeedbackData,
   FeedbackGetOneData,
-  FeedbacksRepository
+  FeedbacksRepository,
+  FeedbackUpdateData
 } from '../feedbacks-repository'
 
 export class PrismaFeedbacksRepository implements FeedbacksRepository {
@@ -26,6 +27,24 @@ export class PrismaFeedbacksRepository implements FeedbacksRepository {
     return await prisma.feedback.findFirst({
       where: {
         id
+      }
+    })
+  }
+
+  async update({ id }: FeedbackUpdateData): Promise<FeedbackData> {
+    const oldCheck = await prisma.feedback.findFirst({
+      where: {
+        id
+      }
+    })
+
+    return await prisma.feedback.update({
+      where: {
+        id
+      },
+      data: {
+        updatedAt: new Date().toISOString(),
+        checked: !oldCheck?.checked
       }
     })
   }
