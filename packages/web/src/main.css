@@ -8,6 +8,7 @@
 @layer utilities {
   .scrollbar-textarea::-webkit-scrollbar {
     width: 0.75rem;
+    height: 0.75rem;
   }
   .scrollbar-textarea::-webkit-scrollbar-thumb {
     border-radius: 0.75rem;
@@ -33,6 +34,7 @@
 
   .scrollbar-app::-webkit-scrollbar {
     width: 0.5rem;
+    height: 0.5rem;
   }
   .dark-scrollbar-thumb-app::-webkit-scrollbar-thumb{
     background: #52525b; 
@@ -52,6 +54,27 @@
   }
   .light-scrollbar-track-app::-webkit-scrollbar-track {
     background: #ffffff;
+  }
+
+  .scrollbar-comment::-webkit-scrollbar {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+  .scrollbar-comment::-webkit-scrollbar-thumb {
+    border-radius: 0.85rem;
+    border: 0.25rem;
+    border-style: solid
+  }
+  .scrollbar-comment::-webkit-scrollbar-thumb{
+    background: #ffffff; 
+    border-color: #8257e5;
+  }
+  .scrollbar-comment::-webkit-scrollbar-button {
+    height: 0rem;
+  }
+  .scrollbar-comment::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 0.85rem;
   }
 }
 
