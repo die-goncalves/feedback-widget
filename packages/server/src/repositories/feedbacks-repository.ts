@@ -15,7 +15,12 @@ export interface FeedbackData {
   checked: boolean
 }
 
+export interface FeedbackGetOneData {
+  id: string
+}
+
 export interface FeedbacksRepository {
   create: (data: FeedbackCreateData) => Promise<void>
   get: () => Promise<FeedbackData[]>
+  getOne: (data: FeedbackGetOneData) => Promise<FeedbackData | null>
 }

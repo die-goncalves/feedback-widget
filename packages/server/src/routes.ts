@@ -4,6 +4,7 @@ import { PrismaFeedbacksRepository } from './repositories/prisma/prisma-feedback
 import { SubmitFeedbackUseCase } from './use-cases/submit-feedback-use-case'
 import { auth, requiredScopes } from 'express-oauth2-jwt-bearer'
 import { GetFeedbackUseCase } from './use-cases/get-feedback-use-case'
+import { GetOneFeedbackUseCase } from './use-cases/get-one-feedback-use-case'
 
 export const routes = express.Router()
 
@@ -43,5 +44,18 @@ routes.get('/feedbacks', checkJwt, checkAdmScopes, async (req, res) => {
 
   const response = await getFeedbackUseCase.execute()
 
+  return res.status(200).send({ data: response })
+})
+
+routes.get('/feedback', checkJwt, checkAdmScopes, async (req, res) => {
+  const { id } = req.query as { id: string }
+
+  const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
+
+  const getOneFeedbackUseCase = new GetOneFeedbackUseCase(
+    prismaFeedbacksRepository
+  )
+
+  const response = await getOneFeedbackUseCase.execute({ id })
   return res.status(200).send({ data: response })
 })
