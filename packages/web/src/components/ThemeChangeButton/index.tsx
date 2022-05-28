@@ -135,11 +135,11 @@ export function ThemeChangeButton() {
         enter="transition ease-out duration-300"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-300"
+        leave="transition ease-in duration-150"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-2 w-40 origin-top-right rounded-[0.25rem] bg-light/surface-primary dark:bg-dark/surface-primary shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 mt-2 w-40 origin-top-right rounded-[0.25rem] bg-light/surface-primary dark:bg-dark/surface-primary shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
           <div className="p-0.5">
             <Menu.Item>
               {({ active }) => (

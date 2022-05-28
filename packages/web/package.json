@@ -9,15 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@headlessui/react": "^1.6.1",
+    "@auth0/auth0-react": "^1.10.1",
+    "@headlessui/react": "^0.0.0-insiders.08b419e",
     "axios": "^0.27.2",
     "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.1",
     "phosphor-react": "^1.4.1",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-router-dom": "6",
+    "react-zoom-pan-pinch": "^2.1.3"
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.0",
     "@types/js-cookie": "^3.0.2",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
