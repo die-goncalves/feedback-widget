@@ -10,7 +10,8 @@ export class PrismaFeedbacksRepository implements FeedbacksRepository {
       data: {
         type,
         comment,
-        screenshot
+        screenshot,
+        checked: false
       }
     })
   }
