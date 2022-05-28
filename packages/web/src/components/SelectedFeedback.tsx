@@ -34,7 +34,7 @@ export function SelectedFeedback({
     event.preventDefault()
 
     setSendingFeedback(true)
-    await api.post('/feedbacks', {
+    await api.post('/create/feedback', {
       type: feedbackType,
       comment: textareaChange,
       screenshot
