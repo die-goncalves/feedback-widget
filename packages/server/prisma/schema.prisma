@@ -16,5 +16,9 @@ model Feedback {
   type       String
   comment    String
   screenshot String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  checked   Boolean
   @@map("feedbacks")
 }
