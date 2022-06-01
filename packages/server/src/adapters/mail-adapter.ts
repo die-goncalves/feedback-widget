@@ -1,6 +1,6 @@
 export interface SendMailData {
   subject: string
-  body: string
+  variables: { type: string; comment: string; screenshot?: string }
 }
 
 export interface MailAdapter {
