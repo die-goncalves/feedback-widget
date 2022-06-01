@@ -6,6 +6,7 @@ import { auth, requiredScopes } from 'express-oauth2-jwt-bearer'
 import { GetFeedbackUseCase } from './use-cases/get-feedback-use-case'
 import { GetOneFeedbackUseCase } from './use-cases/get-one-feedback-use-case'
 import { UpdateFeedbackUseCase } from './use-cases/update-feedback-use-case'
+import { MailgunMailAdapter } from './adapters/mailgun/mailgun-mail-adapter'
 
 export const routes = express.Router()
 
@@ -22,11 +23,12 @@ const checkAdmScopes = requiredScopes([
 routes.post('/create/feedback', async (req, res) => {
   const { type, comment, screenshot } = req.body
   const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
-  const nodemailerMailAdapter = new NodemailerMailAdapter()
+  // const nodemailerMailAdapter = new NodemailerMailAdapter()
+  const mailgunMailAdapter = new MailgunMailAdapter()
 
   const submitFeedbackUseCase = new SubmitFeedbackUseCase(
     prismaFeedbacksRepository,
-    nodemailerMailAdapter
+    mailgunMailAdapter
   )
 
   await submitFeedbackUseCase.execute({
