@@ -1,4 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
+import { Switch } from '@headlessui/react'
 import { Check, CircleNotch, X } from 'phosphor-react'
 import { useEffect, useState } from 'react'
 import { api } from '../../lib/api'
@@ -62,32 +63,31 @@ export function UpdateFeedback({ id, setListFeedback }: UpdateFeedbackProps) {
   }
 
   return (
-    <div className="absolute top-4 left-4 z-10">
+    <>
       <button
+        disabled={loading}
         aria-label={
           specificFeedback?.checked ? 'Revisar feedback' : 'Checar Feedback'
         }
         onClick={async () => await updateFeedback(specificFeedback?.id)}
-        className={`flex p-3 rounded-full border-none transition-all duration-300 ease-out outline-none focus:outline-offset-2 focus:outline focus:outline-2 ${
-          specificFeedback?.checked
-            ? 'bg-red-500 focus:outline-red-300'
-            : 'bg-green-500 focus:outline-green-300'
+        className={`flex justify-center items-center text-brand hover:text-brand-hover border-b-2 border-transparent outline-none ${
+          loading
+            ? 'px-[2.75rem] cursor-not-allowed'
+            : 'transition-all duration-300 ease-out focus:border-brand'
         }`}
       >
         {loading ? (
-          <CircleNotch className="w-6 h-6 text-text-on-brand-color animate-spin" />
+          <CircleNotch className="w-6 h-6 animate-spin" />
         ) : specificFeedback?.checked ? (
-          <X
-            className={`w-6 h-6 text-text-on-brand-color transition-all duration-300 ease-out`}
-            weight="bold"
-          />
+          <span className="text-[0.875rem] leading-[1.5rem] font-medium">
+            Revisar feedback?
+          </span>
         ) : (
-          <Check
-            className={`w-6 h-6 text-text-on-brand-color transition-all duration-300 ease-out`}
-            weight="bold"
-          />
+          <span className="text-[0.875rem] leading-[1.5rem] font-medium">
+            Feedback visto?
+          </span>
         )}
       </button>
-    </div>
+    </>
   )
 }

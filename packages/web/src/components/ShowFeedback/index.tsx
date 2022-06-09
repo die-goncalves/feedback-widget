@@ -1,12 +1,15 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ShowComment } from './ShowComment'
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import {
-  Eraser,
   Image,
-  MagnifyingGlassMinus,
-  MagnifyingGlassPlus
+  ArrowClockwise,
+  Minus,
+  Plus,
+  ArrowDown,
+  ArrowUp,
+  ArrowRight,
+  ArrowLeft
 } from 'phosphor-react'
 import { UpdateFeedback } from './UpdateFeedback'
 
@@ -25,8 +28,51 @@ type ShowFeedbackProps = {
   setListFeedback: React.Dispatch<React.SetStateAction<Feedback[]>>
 }
 
+type Controls = {
+  x: number
+  y: number
+  zoom: number
+}
+
 export function ShowFeedback({ feedback, setListFeedback }: ShowFeedbackProps) {
   const [isOpenShowFeedback, setIsOpenShowFeedback] = useState(false)
+  const [controls, setControls] = useState<Controls>({
+    x: 0,
+    y: 0,
+    zoom: 1
+  })
+  const imageControls = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    if (imageControls.current) {
+      imageControls.current.style.cssText = `
+        ${imageControls.current.style.cssText};
+        transform: translate(${controls.x}px, ${controls.y}px) scale(${controls.zoom})
+      `
+    }
+  }, [controls])
+
+  const onLeft = () => {
+    setControls(prevState => ({ ...prevState, x: prevState.x - 50 }))
+  }
+  const onRight = () => {
+    setControls(prevState => ({ ...prevState, x: prevState.x + 50 }))
+  }
+  const onUp = () => {
+    setControls(prevState => ({ ...prevState, y: prevState.y - 50 }))
+  }
+  const onDown = () => {
+    setControls(prevState => ({ ...prevState, y: prevState.y + 50 }))
+  }
+  const onZoomIn = () => {
+    setControls(prevState => ({ ...prevState, zoom: prevState.zoom + 0.05 }))
+  }
+  const onZoomOut = () => {
+    setControls(prevState => ({ ...prevState, zoom: prevState.zoom - 0.05 }))
+  }
+  const onReset = () => {
+    setControls(prevState => ({ ...prevState, x: 0, y: 0, zoom: 1 }))
+  }
 
   return (
     <>
@@ -84,67 +130,140 @@ export function ShowFeedback({ feedback, setListFeedback }: ShowFeedbackProps) {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="flex relative m-auto overflow-hidden rounded-[0.5rem] bg-light/surface-primary dark:bg-dark/surface-primary shadow-xl ring-2 ring-black ring-opacity-5">
-                <TransformWrapper>
-                  {({ zoomIn, zoomOut, resetTransform }) => (
-                    <>
-                      {feedback.screenshot && (
-                        <div className="flex absolute top-4 left-[calc(50%-5.5rem)] z-10 gap-4">
-                          <button
-                            aria-label="Ampliar visualização da imagem"
-                            className="p-3 rounded-[0.25rem] bg-brand hover:bg-brand-hover transition-all duration-300 ease-out border-none outline-none focus:outline-offset-2 focus:outline focus:outline-2 focus:outline-brand"
-                            onClick={() => zoomIn(0.5)}
-                          >
-                            <MagnifyingGlassPlus
-                              className="w-6 h-6 text-text-on-brand-color"
-                              weight="bold"
-                            />
-                          </button>
-                          <button
-                            aria-label="Resetar zoom da imagem"
-                            className="p-3 rounded-[0.25rem] bg-brand hover:bg-brand-hover transition-all duration-300 ease-out border-none outline-none focus:outline-offset-2 focus:outline focus:outline-2 focus:outline-brand"
-                            onClick={() => resetTransform()}
-                          >
-                            <Eraser
-                              className="w-6 h-6 text-text-on-brand-color"
-                              weight="bold"
-                            />
-                          </button>
-                          <button
-                            aria-label="Reduzir visualização da imagem"
-                            className="p-3 rounded-[0.25rem] bg-brand hover:bg-brand-hover transition-all duration-300 ease-out border-none outline-none focus:outline-offset-2 focus:outline focus:outline-2 focus:outline-brand"
-                            onClick={() => zoomOut(0.5)}
-                          >
-                            <MagnifyingGlassMinus
-                              className="w-6 h-6 text-text-on-brand-color"
-                              weight="bold"
-                            />
-                          </button>
-                        </div>
-                      )}
-                      <ShowComment comment={feedback.comment} />
-                      <UpdateFeedback
-                        id={feedback.id}
-                        setListFeedback={setListFeedback}
-                      />
-
-                      <TransformComponent
-                        wrapperStyle={{
-                          maxWidth: '75vw',
-                          maxHeight: '75vh'
-                        }}
-                      >
-                        {feedback.screenshot ? (
-                          <img
-                            src={feedback.screenshot}
-                            alt={feedback.comment}
+                <>
+                  {feedback.screenshot ? (
+                    <div className="flex">
+                      <div className="flex flex-col pt-10 z-10 gap-2 bg-brand">
+                        <button
+                          type="button"
+                          aria-label="Resetar posição"
+                          onClick={onReset}
+                          className="flex p-2 bg-brand hover:bg-brand-hover border-l-2 border-brand hover:border-brand-hover transition-all duration-300 ease-out outline-none focus:border-text-on-brand-color"
+                        >
+                          <ArrowClockwise
+                            className="w-6 h-6 m-auto text-text-on-brand-color"
+                            weight="bold"
                           />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Ampliar zoom"
+                          onClick={onZoomIn}
+                          className="flex p-2 bg-brand hover:bg-brand-hover border-l-2 border-brand hover:border-brand-hover transition-all duration-300 ease-out outline-none focus:border-text-on-brand-color"
+                        >
+                          <Plus
+                            className="w-6 h-6 m-auto text-text-on-brand-color"
+                            weight="bold"
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Reduzir zoom"
+                          onClick={onZoomOut}
+                          className="flex p-2 bg-brand hover:bg-brand-hover border-l-2 border-brand hover:border-brand-hover transition-all duration-300 ease-out outline-none focus:border-text-on-brand-color"
+                        >
+                          <Minus
+                            className="w-6 h-6 m-auto text-text-on-brand-color"
+                            weight="bold"
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Mover imagem para cima"
+                          onClick={onUp}
+                          className="flex p-2 bg-brand hover:bg-brand-hover border-l-2 border-brand hover:border-brand-hover transition-all duration-300 ease-out outline-none focus:border-text-on-brand-color"
+                        >
+                          <ArrowUp
+                            className="w-6 h-6 m-auto text-text-on-brand-color"
+                            weight="bold"
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Mover imagem para baixo"
+                          onClick={onDown}
+                          className="flex p-2 bg-brand hover:bg-brand-hover border-l-2 border-brand hover:border-brand-hover transition-all duration-300 ease-out outline-none focus:border-text-on-brand-color"
+                        >
+                          <ArrowDown
+                            className="w-6 h-6 m-auto text-text-on-brand-color"
+                            weight="bold"
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Mover imagem para esquerda"
+                          onClick={onLeft}
+                          className="flex p-2 bg-brand hover:bg-brand-hover border-l-2 border-brand hover:border-brand-hover transition-all duration-300 ease-out outline-none focus:border-text-on-brand-color"
+                        >
+                          <ArrowLeft
+                            className="w-6 h-6 m-auto text-text-on-brand-color"
+                            weight="bold"
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Mover imagem para direita"
+                          onClick={onRight}
+                          className="flex p-2 bg-brand hover:bg-brand-hover border-l-2 border-brand hover:border-brand-hover transition-all duration-300 ease-out outline-none focus:border-text-on-brand-color"
+                        >
+                          <ArrowRight
+                            className="w-6 h-6 m-auto text-text-on-brand-color"
+                            weight="bold"
+                          />
+                        </button>
+                      </div>
+
+                      <div className="flex flex-col">
+                        <div className="flex bg-light/surface-secondary dark:bg-dark/surface-secondary z-10 px-4 h-10 justify-between shadow-[inset_0px_-2px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[inset_0px_-2px_0px_0px_rgba(255,255,255,0.1)]">
+                          <UpdateFeedback
+                            id={feedback.id}
+                            setListFeedback={setListFeedback}
+                          />
+                          {feedback.checked ? (
+                            <span className="bg-green-300 flex h-fit p-1 rounded-b-[0.25rem] text-[0.75rem] leading-[0.75rem]">
+                              visto
+                            </span>
+                          ) : (
+                            <span className="bg-red-300 flex h-fit p-1 rounded-b-[0.25rem] text-[0.75rem] leading-[0.75rem]">
+                              pendente
+                            </span>
+                          )}
+
+                          <ShowComment comment={feedback.comment} />
+                        </div>
+                        <img
+                          style={{
+                            maxWidth: '75vw',
+                            maxHeight: '75vh'
+                          }}
+                          ref={imageControls}
+                          src={feedback.screenshot}
+                          alt={feedback.comment}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="w-[24rem] h-[24rem]">
+                      <div className="flex w-full px-4 h-10 bg-light/surface-secondary dark:bg-dark/surface-secondary justify-between shadow-[inset_0px_-2px_0px_0px_rgba(0,0,0,0.1)] dark:shadow-[inset_0px_-2px_0px_0px_rgba(255,255,255,0.1)]">
+                        <UpdateFeedback
+                          id={feedback.id}
+                          setListFeedback={setListFeedback}
+                        />
+                        {feedback.checked ? (
+                          <span className="bg-green-300 flex h-fit p-1 rounded-b-[0.25rem] text-[0.75rem] leading-[0.75rem]">
+                            visto
+                          </span>
                         ) : (
-                          <div className="w-[24rem] h-[24rem]" />
+                          <span className="bg-red-300 flex h-fit p-1 rounded-b-[0.25rem] text-[0.75rem] leading-[0.75rem]">
+                            pendente
+                          </span>
                         )}
-                      </TransformComponent>
-                    </>
+
+                        <ShowComment comment={feedback.comment} />
+                      </div>
+                    </div>
                   )}
-                </TransformWrapper>
+                </>
               </Dialog.Panel>
             </Transition.Child>
           </div>

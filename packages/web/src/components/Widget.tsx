@@ -8,7 +8,10 @@ export function Widget() {
       <Popover className="flex flex-col items-end gap-2">
         {({ open }) => (
           <>
-            <Popover.Panel className="w-[21rem] h-[16.5rem] bg-light/surface-primary dark:bg-dark/surface-primary p-4 rounded-[1rem] relative flex flex-col items-center shadow-lg ring-1 ring-black ring-opacity-5">
+            <Popover.Panel
+              focus
+              className="w-[21rem] h-[16.5rem] bg-light/surface-primary dark:bg-dark/surface-primary p-4 rounded-[1rem] relative flex flex-col items-center shadow-lg ring-1 ring-black ring-opacity-5"
+            >
               <WidgetContent />
             </Popover.Panel>
 

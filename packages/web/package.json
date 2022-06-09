@@ -17,8 +17,7 @@
     "phosphor-react": "^1.4.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "6",
-    "react-zoom-pan-pinch": "^2.1.3"
+    "react-router-dom": "6"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.0",
