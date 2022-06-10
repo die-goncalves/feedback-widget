@@ -44,9 +44,10 @@ Aplicação apresentada na Next Level Week #08 - Return da Rocketseat e aperfei�
 - [Express](https://www.npmjs.com/package/express)
 
 > Veja o arquivo  [package.json](packages/server/package.json) do servidor
+
 > Veja o arquivo  [package.json](packages/web/package.json) do cliente
 
-###### Sobre as tecnologias
+### Sobre as tecnologias
 Listagem das principais tecnologias e porque foram utilizadas:
 - Utilização do ***Vite*** para a construção de uma aplicação react + typescript pois fornece uma experiência de desenvolvimento mais rápida utilizando o que é de mais atual nos navegadores;
 - O ***tailwind css*** é um framework de css que traz classes já customizadas que devem ser incluídas diretamente no html, essas classes são colocadas no atributo class/className nos elementos HTML. Com ele é possível construir componentes personalizados sem escrever CSS e ainda conta com suporte para criação de tema claro/escuro;
@@ -81,11 +82,11 @@ Listagem das principais tecnologias e porque foram utilizadas:
    # Entre no diretório do repositório clonado
    $ cd feedback-widget
    # Instale as dependências do projeto.
-   $ yarn #ou $ npm install
+   $ yarn
    ```
 
-3. Variáveis de ambiente
-  a. Crie o arquivo **.env** em `packages/server/` com as seguintes variáveis: 
+3. Variáveis de ambiente<br/>
+    a. Crie o arquivo **.env** em `packages/server/` com as seguintes variáveis: 
     ```
     DATABASE_URL=
     AUTH0_AUDIENCE=
@@ -124,6 +125,7 @@ Listagem das principais tecnologias e porque foram utilizadas:
           <img src="assets\auth0-variaveis-04.png" alt="Auth0 - criar API">
           - Entre em settings na API criada
           <img src="assets\auth0-variaveis-05.png" alt="Auth0 - configurações da API">
+          
           Em **General Settings** você precisa guardar a informação Identifier no servidor `AUTH0_AUDIENCE=`  e no cliente `VITE_APP_AUTH0_AUDIENCE=` . 
           Em **RBAC Settings** ativar as opções **Enable RBAC** e **Add Permissions in the Access Token** se não estiverem ativadas.
 
@@ -131,6 +133,7 @@ Listagem das principais tecnologias e porque foram utilizadas:
           <img src="assets\auth0-variaveis-06.png" alt="Auth0 - permissões">
         - Na aba lateral entre em **User Management > Users** e crie um usuário administrador.
         <img src="assets\auth0-variaveis-07.png" alt="Auth0 - criar usuário">
+        
         - Entre em **User Management > Roles** e crie uma função chamada Administrador.
         <img src="assets\auth0-variaveis-08.png" alt="Auth0 - criar funções">
           Entre na função criada e adicione as permissões como na imagem
@@ -143,6 +146,7 @@ Listagem das principais tecnologias e porque foram utilizadas:
           - Clique em **Add Action > Build Custom**, digite o nome da ação [ ex: add-roles ] e crie. 
           <img src="assets\auth0-variaveis-12.png" alt="Auth0 - criar ação">
           <img src="assets\auth0-variaveis-13.png" alt="Auth0 - ação criada">
+          
           Após isso coloque o seguinte código e clique em deploy.
             ```
             exports.onExecutePostLogin = async (event, api) => {
@@ -157,6 +161,7 @@ Listagem das principais tecnologias e porque foram utilizadas:
             <img src="assets\auth0-variaveis-14.png" alt="Auth0 - adicionar ação no fluxo de login">
             Adicione `http://localhost:3000/roles` em `VITE_APP_AUTH0_ROLE_URL=`
     <br />
+    
     - **MAILGUN**
       O mailgun disponibiliza um domínio para testes ( o nome do domínio começa com sandbox, chamarei apenas de sandbox 👍 ) durante a versão trial, mas é possível utilizar um domínio que você tenha. Aqui utilizaremos o domínio sandbox.
       <img src="assets\mailgun-variaveis-00.png" alt="Mailgun - domínio">
@@ -168,23 +173,28 @@ Listagem das principais tecnologias e porque foram utilizadas:
       Clique no domínio sandbox e digite o endereço de email que será o destinatário dos seus e-mails enviados, nesse endereço de e-mail você receberá um e-mail de confirmação para deixá-lo verificado e apto a receber os e-mails.
       <img src="assets\mailgun-variaveis-03.png" alt="Mailgun - destinatários autorizados">
     <br />
+    
     - **MAILTRAP**
       Tudo que você precisa do mailtrap são as propriedades user e pass de auth.
       Armazene user e pass em `MAILTRAP_EMAIL_USERNAME=` e `MAILTRAP_EMAIL_PASSWORD=`
       <img src="assets\mailtrap-variaveis.png" alt="Mailtrap - configurações SMTP/POP3">
     <br />
+    
     - **BANCO DE DADOS**
       Na aplicação trabalhamos com o banco de dados SQLite por meio do prisma e precisamos armazenar na variável `DATABASE_URL=` a url do nosso banco de dados, no caso digite `"file:./dev.db"`.
     <br />
+    
     - **SERVIDOR**
       Armazenar a url do nosso servidor que é `http://localhost:3333` em `VITE_API_URL=`.
 <br />
-4. Execute a aplicação
+
+4. Execute a aplicação:
     ```sh
     # Em um terminal rode o servidor
     $ yarn workspace @widget-feedback/server dev
     # A aplicação inciará na porta 3333 - acesse <http://localhost:3333>
     ```
+    
     ```sh
     # Em outro terminal rode o cliente
     $ yarn workspace @widget-feedback/web dev
